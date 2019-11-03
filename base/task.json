@@ -1,0 +1,22 @@
+[
+
+        {
+            "name": "nodejs",
+            "command": [
+                "npm run start:dev"
+            ],
+            "environment": [
+                {
+                    "name": "ROOT_URL",
+                    "value": "http://localhost"
+                },
+                {
+                    "name": "MONGO_URL",
+                    "value": "mongodb://localhost:27017"
+                }
+            ],
+            "memoryReservation": 10,
+            "image": "farooqinfoeng/nodejscicd:nodejs_7"
+
+        }
+]

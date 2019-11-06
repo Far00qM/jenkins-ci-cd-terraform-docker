@@ -1,5 +1,7 @@
-secret_key = ""
-access_key = ""
+
+
+#access_key = ""
+#secret_key = ""
 
 vpc_name = "far_climacell"
 aws_region        = "us-east-1"

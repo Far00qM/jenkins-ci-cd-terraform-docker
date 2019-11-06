@@ -46,6 +46,7 @@ resource "aws_iam_role_policy" "test_policy" {
                   "ecs:StartTelemetrySession",
                   "ecs:UpdateContainerInstancesState",
                   "ecs:Submit*",
+                  "ecr:*",
                   "ecr:GetAuthorizationToken",
                   "ecr:BatchCheckLayerAvailability",
                   "ecr:GetDownloadUrlForLayer",
@@ -59,3 +60,43 @@ resource "aws_iam_role_policy" "test_policy" {
 }
 EOF
 }
+
+
+
+
+
+resource "aws_iam_role" "ecs-service-role" {
+  name = "${var.vpc_name}-ecs-service-role"
+  path = "/"
+  
+  assume_role_policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+               "Service": "ec2.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+        }
+    ]
+}
+EOF
+
+}
+
+
+
+resource "aws_iam_policy_attachment" "service-role-ecr" {
+  name = "${var.vpc_name}-ecs-service-role-ecr"
+  roles = ["${aws_iam_role.ecs-service-role.name}"]
+  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerRegistryReadOnly"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+
+
+}
+
+
+

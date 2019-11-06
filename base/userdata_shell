@@ -15,6 +15,10 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 sudo service mongod start
 
+mongo << EOF
+use devops-exercise
+db.createCollection("users")
+EOF
 
 
 sudo apt-get install -y  \
